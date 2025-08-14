@@ -8,9 +8,9 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Outlet } from 'react-router-dom';
 import SideBar from '../common/SideBar';
+import WhoAmI from '../dev/WhoAmI'; // ★ 追加
 
 const drawerWidth = 240;
-
 
 export default function AppLayout() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -53,9 +53,15 @@ export default function AppLayout() {
           >
             <MenuIcon />
           </IconButton>
+
           <Typography variant="h6" noWrap component="div">
-            まるッと換算~マルカン~ 家計簿Webアプリ
+            マルカン 家計簿Webアプリ
           </Typography>
+
+          {/* 右端に現在のログイン情報（デバッグ用） */}
+          <Box sx={{ ml: 'auto' }}>
+            <WhoAmI />
+          </Box>
         </Toolbar>
       </AppBar>
 
@@ -81,7 +87,7 @@ export default function AppLayout() {
             width: '100%'
           }
         })}
-        >
+      >
         <Toolbar />
         <Outlet />
       </Box>
