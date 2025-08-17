@@ -135,7 +135,12 @@ const Home = () => {
   // 取引を保存
   const handleSaveTransaction = () => {
     if (!selectedDate || !amount || !category) return;
-    
+    function formatDateToYMD(date: Date) {
+      const y = date.getFullYear();
+      const m = String(date.getMonth() + 1).padStart(2, '0');
+      const d = String(date.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
     if (modalMode === 'edit' && editingTransaction) {
       // 編集モード
       const updatedTransaction: Transaction = {
@@ -151,7 +156,7 @@ const Home = () => {
       // 新規追加モード
       const newTransaction: Transaction = {
         id: Date.now().toString(),
-        date: selectedDate.toISOString().split('T')[0],
+        date: formatDateToYMD(selectedDate),
         type: transactionType,
         amount: parseFloat(amount),
         currency,
@@ -160,7 +165,6 @@ const Home = () => {
       };
       addTransaction(newTransaction);
     }
-    
     // 保存後は一覧表示に戻る
     setModalMode('view');
     setEditingTransaction(null);
