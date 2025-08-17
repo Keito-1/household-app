@@ -11,3 +11,6 @@ export const supabase = createClient(
       storage: localStorage,         // 明示しておく（デフォルトだけど安全）
     },
   });
+  
+// ★ デバッグ用：ブラウザのコンソールから使えるように公開（後で削除OK）
+;(globalThis as any).supabase = supabase;
